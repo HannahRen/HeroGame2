@@ -1,0 +1,200 @@
+<!--<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Slide Show</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+        *{
+        	padding: 0px;
+        	margin: 0px;
+        }
+		.images{
+			width:529px;
+			height: 286px;
+			overflow: hidden;
+			position: relative;  
+			
+		}
+		.images ul{
+			width: 3000px;/*宽度足够大，不然溢出部分不能横向排列*/
+			height: 286px;
+			list-style: none;
+			padding: 0px;
+			position: relative;/*平移整个图形，需要relative*/
+		}
+		.images li{
+			float: left;
+		}
+		.numbers li{
+			text-align: center;
+			line-height: 30px;
+			width: 30px;
+			height: 30px;
+			float: left;
+			list-style: none;
+			background-color: red;
+			border:1px solid black;
+		}
+		.numbers .active{
+			background-color: #b63e1a;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="images">
+		<ul>
+	    <li><img src="images/slide1.png"></li>
+		<li><img src="images/slide2.png"></li>
+		<li><img src="images/slide3.png"></li>
+		<li><img src="images/slide4.png"></li>
+		<li><img src="images/slide5.png"></li>
+	    </ul>
+	</div>
+	<ul class="numbers">
+		<li class="active"> 1 </li>
+		<li> 2 </li>
+		<li> 3 </li>
+		<li> 4 </li>
+		<li> 5 </li>
+	</ul>
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var ul_image=$(".images");
+			var li_number=$(".numbers li");
+			var images_width=ul_image.find("li").eq(0).width();
+			var timer=null;
+			var iNow=0;
+
+			li_number.on("click",function(){
+				$(this).addClass("active").siblings().removeClass("active");
+				var index=$(this).index();
+				iNow=index;
+				ul_image.find("ul").animate({"left":-images_width*iNow});
+			});
+
+			timer=setInterval(function(){
+				iNow++;
+				if(iNow>li_number.length-1){
+					iNow=0;
+				}
+				li_number.eq(iNow).trigger("click");},3000);
+		});
+	</script>
+
+</body>
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Slide Show</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+        *{
+        	padding: 0px;
+        	margin: 0px;
+        }
+        img{
+        	display: inline-block;
+        }
+		.images{
+			width:529px;
+			height: 286px;
+			position: relative;
+			overflow: hidden;
+			list-style: none;
+			padding: 0px;
+		}
+  		.images li{
+			position: absolute;
+			top:0px;
+			left: 0px;
+			float: left;
+		}
+		.numbers li{
+			text-align: center;
+			line-height: 30px;
+			width: 30px;
+			height: 30px;
+			float: left;
+			list-style: none;
+			background-color: red;
+			border:1px solid black;
+		}
+		.numbers .active{
+			background-color: #b63e1a;
+		}
+	</style>
+</head>
+
+<body>
+	<ul class="images">
+	    <li><img src="images/slide1.png" style="display: block;"></li>
+		<li><img src="images/slide2.png" style="display: none;"></li>
+		<li><img src="images/slide3.png" style="display: none;"></li>
+		<li><img src="images/slide4.png" style="display: none;"></li>
+		<li><img src="images/slide5.png" style="display: none;"></li>
+	</ul>
+	<ul class="numbers">
+		<li class="active"> 1 </li>
+		<li> 2 </li>
+		<li> 3 </li>
+		<li> 4 </li>
+		<li> 5 </li>
+	</ul>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    	var ul_image=$(".images");
+    	li_image=ul_image.find("li");
+    	var li_number=$(".numbers li");
+    	var timer=null;
+    	var iNow=0;
+
+    	li_number.on("click", function(){
+    		$(this).addClass("active").siblings().removeClass("active");
+    		var index=$(this).index();
+    		li_image.find("img").fadeOut("slow");
+    		iNow=index;
+    		li_image.eq(index).find("img").fadeIn("slow");
+    	});
+    	timer=setInterval(function(){
+				iNow++;
+				if(iNow>li_number.length-1){
+					iNow=0;
+				}
+				li_number.eq(iNow).trigger("click");},2000);
+		});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
